@@ -1,5 +1,11 @@
 [authState]: https://github.com/okta/okta-auth-js#authstatemanager
 
+# 3.1.1
+
+### Breaking Changes
+
+- `$auth` changed to `$oktaAuth`
+
 # 3.1.0
 
 ### Features
