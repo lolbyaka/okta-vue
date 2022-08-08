@@ -11,7 +11,7 @@
 ### Breaking Changes
 
 - [#27](https://github.com/okta/okta-vue/pull/27) See [MIGRATING](MIGRATING.md) for detailed information.
-  - Replaces `Auth` service with instance of [@okta/okta-auth-js](https://github.com/okta/okta-auth-js) for `$auth`, so all configuration options and public methods are available.
+  - Replaces `Auth` service with instance of [@okta/okta-auth-js](https://github.com/okta/okta-auth-js) for `$oktaAuth`, so all configuration options and public methods are available.
   - By default `isAuthenticated` will be true only if **both** accessToken **and** idToken are valid
   - Replaces `Auth.handleCallback` with `LoginCallback` component
   - Changes `@okta/okta-auth-js`, `vue` and `vue-router` as peerDependencies

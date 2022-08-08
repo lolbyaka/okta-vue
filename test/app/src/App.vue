@@ -15,10 +15,10 @@ export default Vue.extend({
   name: 'app',
   methods: {
     login () {
-      this.$auth.signInWithRedirect()
+      this.$oktaAuth.signInWithRedirect()
     },
     async logout () {
-      await this.$auth.signOut()
+      await this.$oktaAuth.signOut()
     }
   }
 })

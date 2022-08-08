@@ -28,17 +28,17 @@ describe('LoginCallback', () => {
     localVue.use(VueRouter)
     localVue.use(OktaVue, { oktaAuth })
 
-    jest.spyOn(localVue.prototype.$auth, 'handleLoginRedirect')
-    jest.spyOn(localVue.prototype.$auth, 'isLoginRedirect').mockReturnValue(options.isLoginRedirect)
-    jest.spyOn(localVue.prototype.$auth, 'storeTokensFromRedirect').mockImplementation(() => {
+    jest.spyOn(localVue.prototype.$oktaAuth, 'handleLoginRedirect')
+    jest.spyOn(localVue.prototype.$oktaAuth, 'isLoginRedirect').mockReturnValue(options.isLoginRedirect)
+    jest.spyOn(localVue.prototype.$oktaAuth, 'storeTokensFromRedirect').mockImplementation(() => {
       return new Promise(resolve => {
-        if (localVue.prototype.$auth.isLoginRedirect()) {
-          localVue.prototype.$auth.emitter.emit('authStateChange', { isPending: false })
+        if (localVue.prototype.$oktaAuth.isLoginRedirect()) {
+          localVue.prototype.$oktaAuth.emitter.emit('authStateChange', { isPending: false })
         }
         resolve()
       })
     })
-    jest.spyOn(localVue.prototype.$auth.options, 'restoreOriginalUri')
+    jest.spyOn(localVue.prototype.$oktaAuth.options, 'restoreOriginalUri')
 
     const router = new VueRouter({
       routes: [{ path: '/foo', component: LoginCallback }]
@@ -55,16 +55,16 @@ describe('LoginCallback', () => {
 
   it('calls handleLoginRedirect', () => {
     bootstrap()
-    expect(localVue.prototype.$auth.handleLoginRedirect).toHaveBeenCalled()
+    expect(localVue.prototype.$oktaAuth.handleLoginRedirect).toHaveBeenCalled()
   })
 
   it('calls the default "restoreOriginalUri" options when in login redirect uri', () => {
     bootstrap({ isLoginRedirect: true })
-    expect(localVue.prototype.$auth.options.restoreOriginalUri).toHaveBeenCalled()
+    expect(localVue.prototype.$oktaAuth.options.restoreOriginalUri).toHaveBeenCalled()
   })
 
   it('should not call the default "restoreOriginalUri" options when not in login redirect uri', () => {
     bootstrap({ isLoginRedirect: false })
-    expect(localVue.prototype.$auth.options.restoreOriginalUri).not.toHaveBeenCalled()
+    expect(localVue.prototype.$oktaAuth.options.restoreOriginalUri).not.toHaveBeenCalled()
   })
 })

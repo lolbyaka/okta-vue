@@ -21,7 +21,7 @@ export default NavigationGuardMixin.extend({
   },
   methods: {
     async getUser () {
-      const user = await this.$auth.getUser()
+      const user = await this.$oktaAuth.getUser()
       this.user = JSON.stringify(user, null, 4)
     }
   }

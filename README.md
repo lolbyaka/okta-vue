@@ -138,10 +138,10 @@ export default {
   name: 'app',
   methods: {
     async login () {
-      await this.$auth.signInWithRedirect()
+      await this.$oktaAuth.signInWithRedirect()
     },
     async logout () {
-      await this.$auth.signOut()
+      await this.$oktaAuth.signOut()
     }
   }
 }
@@ -176,7 +176,7 @@ export default {
     }
   },
   async created () {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${this.$auth.getAccessToken()}`
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.$oktaAuth.getAccessToken()}`
     try {
       const response = await axios.get(`http://localhost:{serverPort}/api/messages`)
       this.posts = response.data
@@ -224,9 +224,9 @@ export default router
 
 ## Reference
 
-### `$auth`
+### `$oktaAuth`
 
-This SDK works as a [Vue Plugin][]. It provides an instance of the [Okta Auth SDK][] to your components on the [Vue prototype][]. You can access the [Okta Auth SDK][] instance by using `this.$auth` in your components.
+This SDK works as a [Vue Plugin][]. It provides an instance of the [Okta Auth SDK][] to your components on the [Vue prototype][]. You can access the [Okta Auth SDK][] instance by using `this.$oktaAuth` in your components.
 
 ### `LoginCallback`
 
@@ -294,7 +294,7 @@ export default NavigationGuardMixin.extend({
   },
   methods: {
     async getUser () {
-      const user = await this.$auth.getUser()
+      const user = await this.$oktaAuth.getUser()
       this.user = JSON.stringify(user, null, 4)
     }
   }

@@ -29,7 +29,7 @@ describe('OktaVue module', () => {
     const oktaAuth = new OktaAuth(baseConfig)
     const localVue = createLocalVue()
     localVue.use(OktaVue, { oktaAuth })
-    expect(localVue.prototype.$auth instanceof OktaAuth).toBeTruthy()
+    expect(localVue.prototype.$oktaAuth instanceof OktaAuth).toBeTruthy()
   })
   test('Exports "LoginCallback" component', () => {
     expect(LoginCallback).toBe(InternalLoginCallback)

@@ -127,7 +127,7 @@ function install (Vue: typeof _Vue, {
   Vue.mixin(NavigationGuardMixin)
 
   // add oktaAuth instance to Vue
-  Vue.prototype.$auth = oktaAuth
+  Vue.prototype.$oktaAuth = oktaAuth
 }
 
 export default { install }

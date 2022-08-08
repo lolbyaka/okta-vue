@@ -21,12 +21,12 @@ export default Vue.extend({
   },
   methods: {
     signIn () {
-      this.$auth.signInWithCredentials({
+      this.$oktaAuth.signInWithCredentials({
         username: this.username,
         password: this.password
       })
       .then(res =>
-        this.$auth.signInWithRedirect({
+        this.$oktaAuth.signInWithRedirect({
           originalUri: '/protected',
           sessionToken: res.sessionToken
         })

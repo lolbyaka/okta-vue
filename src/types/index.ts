@@ -10,7 +10,7 @@ export interface OktaVueOptions {
 // Declare augmentation for Vue
 declare module 'vue/types/vue' {
   interface Vue {
-    $auth: OktaAuth;
+    $oktaAuth: OktaAuth;
     authState: AuthState;
     $_oktaVue_handleAuthStateUpdate: (authState: AuthState) => void;
   }

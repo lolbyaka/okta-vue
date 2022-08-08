@@ -39,7 +39,7 @@ Vue.use(OktaVue, { oktaAuth })
 
 ### Full `@okta/okta-auth-js` API is available
 
-`@okta/okta-vue` version 2.x and earlier provided a wrapper around [@okta/okta-auth-js][] but many methods were hidden. Version 3.x replaces `Auth` service with instance of [@okta/okta-auth-js][] for `$auth`, so the full [api](https://github.com/okta/okta-auth-js#api-reference) and all [options](https://github.com/okta/okta-auth-js#configuration-options) are now supported by this SDK. To provide a better experience, several methods which existed on the wrapper have been removed or replaced.
+`@okta/okta-vue` version 2.x and earlier provided a wrapper around [@okta/okta-auth-js][] but many methods were hidden. Version 3.x replaces `Auth` service with instance of [@okta/okta-auth-js][] for `$oktaAuth`, so the full [api](https://github.com/okta/okta-auth-js#api-reference) and all [options](https://github.com/okta/okta-auth-js#configuration-options) are now supported by this SDK. To provide a better experience, several methods which existed on the wrapper have been removed or replaced.
 
 #### `login` is removed
 
@@ -52,13 +52,13 @@ This method called `onAuthRequired`, if it was set in the config options, or `lo
 If you had code like this:
 
 ```javascript
-$auth.loginRedirect('/profile', { scopes: ['openid', 'profile'] });
+$oktaAuth.loginRedirect('/profile', { scopes: ['openid', 'profile'] });
 ```
 
 it should be rewritten as:
 
 ```javascript
-$auth.signInWithRedirect({ originalUri: '/profile', scopes: ['openid', 'profile'] });
+$oktaAuth.signInWithRedirect({ originalUri: '/profile', scopes: ['openid', 'profile'] });
 ```
 
 #### `logout` is replaced by `signOut`
@@ -68,13 +68,13 @@ $auth.signInWithRedirect({ originalUri: '/profile', scopes: ['openid', 'profile'
 If you had code like this:
 
 ```javascript
-$auth.logout('/goodbye');
+$oktaAuth.logout('/goodbye');
 ```
 
 it should be rewritten as:
 
 ```javascript
-$auth.signOut({ postLogoutRedirectUri: window.location.orign + '/goodbye' });
+$oktaAuth.signOut({ postLogoutRedirectUri: window.location.orign + '/goodbye' });
 ```
 
 Note that the value for `postLogoutRedirectUri` must be an absolute URL. This URL must also be on the "allowed list" in your Okta app's configuration. If no options are passed or no `postLogoutRedirectUri` is set on the options object, it will redirect to `window.location.origin` after sign out is complete.
@@ -100,7 +100,7 @@ With maintaining in-memory [AuthState][] since [@okta/okta-auth-js][] version 4.
 You may access the `TokenManager` with the `tokenManager` property:
 
 ```javascript
-const tokens = $auth.tokenManager.getTokens();
+const tokens = $oktaAuth.tokenManager.getTokens();
 ```
 
 #### `authRedirectGuard` has been removed
@@ -108,7 +108,7 @@ const tokens = $auth.tokenManager.getTokens();
 Guard logic is handled internally in `@okta/okta-vue@3.x`, previous global guard registration should be removed:
 
 ```diff
-- router.beforeEach(Vue.prototype.$auth.authRedirectGuard())
+- router.beforeEach(Vue.prototype.$oktaAuth.authRedirectGuard())
 ```
 
 ### "Active" token renew

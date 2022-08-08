@@ -49,10 +49,10 @@ describe('OktaVue', () => {
     setupOktaAuth()
   })
 
-  it('should add custom userAgent to $auth', () => {
+  it('should add custom userAgent to $oktaAuth', () => {
     oktaAuth.userAgent = 'foo'
     bootstrap()
-    expect(localVue.prototype.$auth.userAgent).toBe(`${pkg.name}/${pkg.version} foo`)
+    expect(localVue.prototype.$oktaAuth.userAgent).toBe(`${pkg.name}/${pkg.version} foo`)
   })
 
   describe('restoreOriginalUri', () => {
@@ -60,14 +60,14 @@ describe('OktaVue', () => {
     it('should call restoreOriginalUri callback if provided when calls restoreOriginalUri', () => {
       oktaAuth.options.restoreOriginalUri = jest.fn()
       bootstrap()
-      localVue.prototype.$auth.options.restoreOriginalUri(oktaAuth, mockOriginalUri)
+      localVue.prototype.$oktaAuth.options.restoreOriginalUri(oktaAuth, mockOriginalUri)
       expect(oktaAuth.options.restoreOriginalUri).toHaveBeenCalledWith(oktaAuth, mockOriginalUri)
     })
 
     it('should call default implementation when restoreOriginalUri callback is not provided', () => {
       bootstrap()
       jest.spyOn(wrapper.vm.$router, 'replace').mockImplementation()
-      localVue.prototype.$auth.options.restoreOriginalUri(oktaAuth, mockOriginalUri)
+      localVue.prototype.$oktaAuth.options.restoreOriginalUri(oktaAuth, mockOriginalUri)
       expect(wrapper.vm.$router.replace).toHaveBeenCalledWith({ path: '/fakepath' })
     })
   })

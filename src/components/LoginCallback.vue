@@ -17,7 +17,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'LoginCallback',
   async beforeMount () {
-    await this.$auth.handleLoginRedirect()
+    await this.$oktaAuth.handleLoginRedirect()
   },
   render() { 
     // typescript not allow empty render function, here's the workaround for renderless component
